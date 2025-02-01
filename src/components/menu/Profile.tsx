@@ -10,8 +10,8 @@ export const Profile: React.FC<ProfileProps> = ({ name, photo, date }) => {
       <div className="flex items-center gap-4 mt-16 mb-14 pr-2 mx-3">
         <img src={photo} className="w-24 h-24 rounded-full" />
         <div className="flex flex-col">
-          <div className="text-xl font-[Yekan] font-bold">{name}</div>
-          <div className="text-xl font-[Yekan] font-bold">{date}</div>
+          <div className="text-xl font-bold">{name}</div>
+          <div className="text-xl font-bold">{date}</div>
         </div>
       </div>
     </div>

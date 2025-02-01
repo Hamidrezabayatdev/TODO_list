@@ -43,7 +43,7 @@ export const Menu = () => {
     }
   };
   return (
-    <div className="w-80 h-[90vh] my-auto bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-100 flex flex-col gap-6 px-2 pt-4 rounded-2xl shadow">
+    <div className="w-80 h-[90vh] my-auto bg-white dark:bg-zinc-800 flex flex-col gap-6 px-2 pt-4 rounded-2xl shadow">
       <Profile name="حمیدرضا بیات" photo={"src/assets/1-to-1.jpg"} date="1403/11/12" />
       {Object.entries(MenuItemsData).map(([key, value]) => (
         <MenuItem key={key} text={value.title} icon={value.icon} />
