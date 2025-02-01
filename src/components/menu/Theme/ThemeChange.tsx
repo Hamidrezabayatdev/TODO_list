@@ -1,5 +1,15 @@
+import { useState } from "react";
 import { ThemeChangeBtn } from "./ThemeChangeBtn";
 export const ThemeChange = () => {
+  const [isDark, setIsDark] = useState(false);
+  function handleLightTheme() {
+    document.documentElement.classList.remove("dark");
+    setIsDark(false);
+  }
+  function handleDarkTheme() {
+    document.documentElement.classList.add("dark");
+    setIsDark(true);
+  }
   const ThemeIcons = {
     light: (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
@@ -13,10 +23,14 @@ export const ThemeChange = () => {
     ),
   };
   return (
-    <div className="bg-zinc-100 mt-auto mb-4 py-1 px-2 rounded-lg flex items-center justify-center gap-2 font-[Yekan]">
-      <ThemeChangeBtn mode="روشن" icon={ThemeIcons.light} />
+    <div className="bg-zinc-200 dark:bg-zinc-700 mt-auto mx-4 mb-4 py-1 px-2 rounded-lg flex items-center justify-center gap-2 font-[Yekan]">
+      <div onClick={handleLightTheme}>
+        <ThemeChangeBtn isDark={isDark} mode="light" icon={ThemeIcons.light} />
+      </div>
       <div className="w-[1px] h-[60%] bg-zinc-500/30"></div>
-      <ThemeChangeBtn mode="تاریک" icon={ThemeIcons.dark} />
+      <div onClick={handleDarkTheme}>
+        <ThemeChangeBtn isDark={isDark} mode="dark" icon={ThemeIcons.dark} />
+      </div>
     </div>
   );
 };
