@@ -1,6 +1,7 @@
 import { MenuItem } from "./MenuItem";
 import { MenuItemsType } from "./MenuItemsType";
 import { Profile } from "./Profile";
+import { ThemeChange } from "./Theme/ThemeChange";
 export const Menu = () => {
   const MenuItemsData: MenuItemsType = {
     home: {
@@ -47,6 +48,7 @@ export const Menu = () => {
       {Object.entries(MenuItemsData).map(([key, value]) => (
         <MenuItem key={key} text={value.title} icon={value.icon} />
       ))}
+      <ThemeChange></ThemeChange>
     </div>
   );
 };
