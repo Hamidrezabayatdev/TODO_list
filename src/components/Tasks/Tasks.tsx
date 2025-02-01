@@ -7,6 +7,9 @@ export const Tasks = () => {
   function addTask(taskInputTitle: string, taskInputDescription: string) {
     setTasks([...tasks, { id: tasks.length + 1, title: taskInputTitle, description: taskInputDescription }]);
   }
+  function editTask (taskId: number, taskTitle: string, taskDescription: string) {
+    setTasks(tasks.map((task) => (task.id === taskId ? { ...task, title: taskTitle, description: taskDescription } : task)));
+  }
   function taskDelete (taskId: number) {
     setTasks(tasks.filter(task => task.id !== taskId));
   }
@@ -15,7 +18,7 @@ export const Tasks = () => {
       <div className="text-2xl font-bold">تسک های امروز</div>
       <div className="opacity-50">3 تسک رو باید انجام بدی</div>
       <NewTask addTask={addTask} />
-      <ShowTasks tasks={tasks} taskDelete={taskDelete} />
+      <ShowTasks tasks={tasks} taskDelete={taskDelete} editTask={editTask}/>
     </div>
   );
 };
