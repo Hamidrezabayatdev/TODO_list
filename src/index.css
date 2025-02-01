@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+@font-face {
+  font-family: Yekan;
+  font-display: swap;
+  src: url("./Fonts/Yekan.ttf") format("truetype");
+}
