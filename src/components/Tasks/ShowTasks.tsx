@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import {ITask} from './ITask'
+import { useState, useRef } from "react";
+import { ITask } from "./ITask";
 interface ShowTasksProps {
   tasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;
   editTask: (taskId: number, taskTitle: string, taskDescription: string) => void;
   doTask: (task: ITask, isDone: boolean) => void;
 }
-export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps) => {
+export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProps) => {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(0);
-  const [editingTaskTitle, setEditingTaskTitle] = useState('');
-  const [editingTaskDescription, setEditingTaskDescription] = useState('');
+  const [editingTaskTitle, setEditingTaskTitle] = useState("");
+  const [editingTaskDescription, setEditingTaskDescription] = useState("");
   const startEditing = (task: ITask) => {
     setEditingTaskId(task.id);
     setEditingTaskTitle(task.title);
     setEditingTaskDescription(task.description);
   };
-
+  const descriptionRef = useRef<HTMLInputElement | null>(null);
   function saveTaskEdit(taskId: number) {
     editTask(taskId, editingTaskTitle, editingTaskDescription);
     setEditingTaskId(null);
@@ -23,7 +23,7 @@ export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps)
   return (
     <div>
       {tasks.length === 0 ? (
-        <div className="mx-auto">
+        <div className="mx-auto hidden md:block">
           <img className="mx-auto size-72 object-contain" src="/src/assets/noTasks.png" alt="" />
           <p className="text-2xl text-center text-zinc-600 dark:text-zinc-100">چه کارهایی امروز برای انجام داری؟</p>
           <p className="text-xl text-center mt-1 text-zinc-600 dark:text-zinc-100 opacity-75">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
@@ -37,10 +37,31 @@ export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps)
                 <input className="size-6 -mr-1 rounded-2xl" type="checkbox" name="taskDone" id={index.toString()} checked={false} onChange={(e) => doTask(task, e.target.checked)} />
                 <div className="w-full">
                   <div className="text-lg font-bold" key={index}>
-                    <input className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`} value={editingTaskId === task.id ? editingTaskTitle : task.title} onChange={(e) => setEditingTaskTitle(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
+                    <input
+                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      value={editingTaskId === task.id ? editingTaskTitle : task.title}
+                      onChange={(e) => setEditingTaskTitle(e.target.value)}
+                      type="text"
+                      readOnly={editingTaskId !== task.id}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") descriptionRef.current?.focus();
+                      }}
+                    />
                   </div>
                   <div className={`text-sm opacity-75 mt-0.5 ${editingTaskId === task.id ? "" : task.description === "" ? "hidden" : ""}`} key={index}>
-                    <input className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`} value={editingTaskId === task.id ? editingTaskDescription : task.description} onChange={(e) => setEditingTaskDescription(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
+                    <input
+                      ref={descriptionRef}
+                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      value={editingTaskId === task.id ? editingTaskDescription : task.description}
+                      onChange={(e) => setEditingTaskDescription(e.target.value)}
+                      type="text"
+                      readOnly={editingTaskId !== task.id}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter"){
+                          saveTaskEdit(task.id);
+                        }
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -66,4 +87,4 @@ export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps)
       )}
     </div>
   );
-}
+};
