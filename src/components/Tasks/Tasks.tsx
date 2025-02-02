@@ -4,22 +4,32 @@ import { ITask } from "./ITask";
 import { ShowTasks } from "./ShowTasks";
 import { ShowDoneTasks } from "./ShowDoneTasks";
 import { saveToDB } from "./SaveToDB";
+import { loadFromDB } from "./LoadFromDB";
 export const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-    const savedDoneTasks = JSON.parse(localStorage.getItem("doneTasks") || "[]");
-    setTasks(savedTasks);
-    setDoneTasks(savedDoneTasks);
+    const loadTasks = async () => {
+      try {
+        await loadFromDB({ setTasks, setDoneTasks });
+      } catch (error) {
+        console.error("Error loading tasks from DB:", error);
+      }
+    };
+    loadTasks();
   }, []);
   useEffect(() => {
-    if (tasks.length > 0) {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-      saveToDB(tasks, doneTasks);
-    }
+    const saveTasks = async () => {
+      if (tasks.length > 0) {
+        try {
+          await saveToDB(tasks, doneTasks);
+        } catch (error) {
+          console.error("Error saving tasks to DB:", error);
+        }
+      }
+    };
+    saveTasks();
   }, [tasks, doneTasks]);
   function addTask(taskInputTitle: string, taskInputDescription: string) {
     setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription }]);
