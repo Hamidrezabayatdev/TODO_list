@@ -3,6 +3,7 @@ import { NewTask } from "./NewTask";
 import { ITask } from "./ITask";
 import { ShowTasks } from "./ShowTasks";
 import { ShowDoneTasks } from "./ShowDoneTasks";
+import { saveToDB } from "./SaveToDB";
 export const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
@@ -13,18 +14,13 @@ export const Tasks = () => {
     setTasks(savedTasks);
     setDoneTasks(savedDoneTasks);
   }, []);
-
   useEffect(() => {
     if (tasks.length > 0) {
       localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-  }, [tasks]);
-
-  useEffect(() => {
-    if (doneTasks.length > 0) {
       localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+      saveToDB(tasks, doneTasks);
     }
-  }, [doneTasks]);
+  }, [tasks, doneTasks]);
   function addTask(taskInputTitle: string, taskInputDescription: string) {
     setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription }]);
   }

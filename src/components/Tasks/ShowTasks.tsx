@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { ITask } from "./ITask";
+
 interface ShowTasksProps {
   tasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;
@@ -15,7 +16,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
     setEditingTaskTitle(task.title);
     setEditingTaskDescription(task.description);
   };
-  const descriptionRef = useRef<HTMLInputElement | null>(null);
+
   function saveTaskEdit(taskId: number) {
     editTask(taskId, editingTaskTitle, editingTaskDescription);
     setEditingTaskId(null);
@@ -44,13 +45,12 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                       type="text"
                       readOnly={editingTaskId !== task.id}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter") descriptionRef.current?.focus();
+                        if (e.key === "Enter") saveTaskEdit(task.id);
                       }}
                     />
                   </div>
                   <div className={`text-sm opacity-75 mt-0.5 ${editingTaskId === task.id ? "" : task.description === "" ? "hidden" : ""}`} key={index}>
                     <input
-                      ref={descriptionRef}
                       className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
                       value={editingTaskId === task.id ? editingTaskDescription : task.description}
                       onChange={(e) => setEditingTaskDescription(e.target.value)}
