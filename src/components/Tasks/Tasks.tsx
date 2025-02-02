@@ -50,13 +50,13 @@ export const Tasks = () => {
   return (
     <div className="w-full mt-20">
       <div className="text-2xl font-bold">تسک های امروز</div>
-      <div className="opacity-50">3 تسک رو باید انجام بدی</div>
+      <div className={`opacity-50 ${tasks.length > 0 ? "" : "invisible"}`}>{tasks.length} تسک رو باید انجام بدی</div>
       <NewTask addTask={addTask} />
-      <div className={`${tasks.length > 0 ? "bg-zinc-200/25" : ""}  dark:bg-zinc-700/25 rounded-2xl`}>
+      <div className={`${tasks.length > 0 ? "bg-zinc-200/25 dark:bg-zinc-700/25" : ""} rounded-2xl`}>
         <ShowTasks tasks={tasks} taskDelete={taskDelete} editTask={editTask} doTask={doTask} />
       </div>
       <div className="mt-5 text-2xl font-bold">تسک های انجام شده</div>
-      <div className="opacity-50">3 تسک رو انجام دادی</div>
+      <div className="opacity-50">{doneTasks.length > 0 ? `${doneTasks.length} تسک رو باید انجام بدی` : "هیچ تسکی انجام نشده"}</div>
       <div className="bg-zinc-200/25 dark:bg-zinc-700/25 rounded-2xl">
         <ShowDoneTasks doneTasks={doneTasks} taskDelete={taskDelete} doTask={doTask} />
       </div>

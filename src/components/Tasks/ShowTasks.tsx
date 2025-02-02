@@ -25,8 +25,8 @@ export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps)
       {tasks.length === 0 ? (
         <div className="mx-auto">
           <img className="mx-auto size-72 object-contain" src="/src/assets/noTasks.png" alt="" />
-          <p className="text-2xl text-center text-zinc-600">چه کارهایی امروز برای انجام داری؟</p>
-          <p className="text-xl text-center mt-1 text-zinc-600 opacity-75">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
+          <p className="text-2xl text-center text-zinc-600 dark:text-zinc-100">چه کارهایی امروز برای انجام داری؟</p>
+          <p className="text-xl text-center mt-1 text-zinc-600 dark:text-zinc-100 opacity-75">میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
         </div>
       ) : (
         <div>
@@ -37,10 +37,10 @@ export const ShowTasks = ({tasks, taskDelete, editTask, doTask}: ShowTasksProps)
                 <input className="size-6 -mr-1 rounded-2xl" type="checkbox" name="taskDone" id={index.toString()} checked={false} onChange={(e) => doTask(task, e.target.checked)} />
                 <div className="w-full">
                   <div className="text-lg font-bold" key={index}>
-                    <input className={`w-full p-0.5 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75" : ""}`} value={editingTaskId === task.id ? editingTaskTitle : task.title} onChange={(e) => setEditingTaskTitle(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
+                    <input className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`} value={editingTaskId === task.id ? editingTaskTitle : task.title} onChange={(e) => setEditingTaskTitle(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
                   </div>
                   <div className={`text-sm opacity-75 mt-0.5 ${editingTaskId === task.id ? "" : task.description === "" ? "hidden" : ""}`} key={index}>
-                    <input className={`w-full p-0.5 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75" : ""}`} value={editingTaskId === task.id ? editingTaskDescription : task.description} onChange={(e) => setEditingTaskDescription(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
+                    <input className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`} value={editingTaskId === task.id ? editingTaskDescription : task.description} onChange={(e) => setEditingTaskDescription(e.target.value)} type="text" readOnly={editingTaskId !== task.id} />
                   </div>
                 </div>
               </div>
