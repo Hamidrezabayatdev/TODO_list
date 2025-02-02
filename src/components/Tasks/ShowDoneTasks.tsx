@@ -17,7 +17,7 @@ export const ShowDoneTasks = ({ doneTasks, taskDelete, doTask }: ShowDoneTasksPr
               <div className="text-lg font-bold" key={index}>
                 <input className="w-full outline-none" value={task.title} type="text" readOnly />
               </div>
-              <div className="text-sm opacity-75" key={index}>
+              <div className={`text-sm opacity-75 ${task.description === "" ? "hidden" : ""}`} key={index}>
                 <input className="w-full outline-none" value={task.description} type="text" readOnly />
               </div>
             </div>

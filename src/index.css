@@ -5,3 +5,7 @@
   font-display: swap;
   src: url("./Fonts/Yekan.ttf") format("truetype");
 }
+* {
+  font-family: Yekan;
+  box-sizing: border-box;
+}
