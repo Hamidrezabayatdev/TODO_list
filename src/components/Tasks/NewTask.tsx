@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-
+import PersianDatePicker from "../DatePickerComponent";
 export const NewTask = (props: { addTask: (taskInputTitle: string, taskInputDescription: string) => void }) => {
   const [NewTaskInputTitle, setNewTaskInputTitle] = useState("");
   const [NewTaskInputDescription, setNewTaskInputDescription] = useState("");
@@ -44,6 +44,7 @@ export const NewTask = (props: { addTask: (taskInputTitle: string, taskInputDesc
         placeholder="توضیحات"
         className="w-full mt-2 mr-8 text-sm bg-transparent outline-none"
       />
+      <PersianDatePicker />
     </div>
   );
 };
