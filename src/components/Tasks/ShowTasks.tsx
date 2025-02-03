@@ -40,6 +40,8 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                   <div className="text-lg font-bold" key={index}>
                     <input
                       className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      title="title"
+                      placeholder="تسک"
                       value={editingTaskId === task.id ? editingTaskTitle : task.title}
                       onChange={(e) => setEditingTaskTitle(e.target.value)}
                       type="text"
@@ -52,6 +54,8 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                   <div className={`text-sm opacity-75 mt-0.5 ${editingTaskId === task.id ? "" : task.description === "" ? "hidden" : ""}`} key={index}>
                     <input
                       className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      title="description"
+                      placeholder="توضیحات"
                       value={editingTaskId === task.id ? editingTaskDescription : task.description}
                       onChange={(e) => setEditingTaskDescription(e.target.value)}
                       type="text"

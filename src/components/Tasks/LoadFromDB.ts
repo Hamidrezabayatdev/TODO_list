@@ -7,7 +7,13 @@ export function loadFromDB({ setTasks, setDoneTasks }: loadFromDBProps) {
   fetch("https://todo-list-dce98-default-rtdb.firebaseio.com/tasks.json")
     .then((response) => response.json())
     .then((data) => {
-      const { tasks, doneTasks } = data;
+      let { tasks, doneTasks } = data;
+      if (tasks === undefined) {
+        tasks = [];
+      }
+      if (doneTasks === undefined) {
+        doneTasks = [];
+      }
       console.log(tasks, doneTasks);
       setTasks(tasks);
       setDoneTasks(doneTasks);
