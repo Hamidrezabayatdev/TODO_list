@@ -4,21 +4,23 @@ import { ITask } from "./ITask";
 interface ShowTasksProps {
   tasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;
-  editTask: (taskId: number, taskTitle: string, taskDescription: string) => void;
+  editTask: (taskId: number, taskTitle: string, taskDescription: string, taskInputCategories: string[]) => void;
   doTask: (task: ITask, isDone: boolean) => void;
 }
 export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProps) => {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(0);
   const [editingTaskTitle, setEditingTaskTitle] = useState("");
   const [editingTaskDescription, setEditingTaskDescription] = useState("");
+  const [editingTaskCategories, setEditingTaskCategories] = useState<string[]>([]);
   const startEditing = (task: ITask) => {
     setEditingTaskId(task.id);
     setEditingTaskTitle(task.title);
     setEditingTaskDescription(task.description);
+    setEditingTaskCategories(task.categories);
   };
 
   function saveTaskEdit(taskId: number) {
-    editTask(taskId, editingTaskTitle, editingTaskDescription);
+    editTask(taskId, editingTaskTitle, editingTaskDescription, editingTaskCategories);
     setEditingTaskId(null);
   }
   return (

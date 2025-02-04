@@ -31,11 +31,11 @@ export const Tasks = () => {
     };
     saveTasks();
   }, [tasks, doneTasks]);
-  function addTask(taskInputTitle: string, taskInputDescription: string) {
-    setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription }]);
+  function addTask(taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[]) {
+    setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription, categories: taskInputCategories }]);
   }
-  function editTask(taskId: number, taskTitle: string, taskDescription: string) {
-    setTasks(tasks.map((task) => (task.id === taskId ? { ...task, title: taskTitle, description: taskDescription } : task)));
+  function editTask(taskId: number, taskTitle: string, taskDescription: string, taskInputCategories: string[]) {
+    setTasks(tasks.map((task) => (task.id === taskId ? { ...task, title: taskTitle, description: taskDescription, categories: taskInputCategories } : task)));
   }
   function taskDelete(taskId: number, doneOrTasks: string) {
     if (doneOrTasks === "done") {
