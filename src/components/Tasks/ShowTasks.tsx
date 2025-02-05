@@ -35,13 +35,13 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
         <div>
           {tasks.map((task, index) => (
             <div key={index} className="p-4 w-full mt-4 flex items-center justify-between rounded-2xl border-[1px] border-zinc-400 dark:border-zinc-600">
-              <div className="flex items-center w-full gap-4">
+              <div className="flex items-center w-full gap-4 ml-3">
                 <div className="w-1 h-16 -mr-4 bg-zinc-500 rounded-l-lg rounded-bl-lg"></div>
                 <input className="size-6 -mr-1 rounded-2xl" type="checkbox" name="taskDone" id={index.toString()} checked={false} onChange={(e) => doTask(task, e.target.checked)} />
                 <div className="w-full">
                   <div className="text-lg font-bold" key={index}>
                     <input
-                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-700/75" : ""}`}
                       title="title"
                       placeholder="تسک"
                       value={editingTaskId === task.id ? editingTaskTitle : task.title}
@@ -55,7 +55,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                   </div>
                   <div className={`text-sm opacity-75 mt-0.5 ${editingTaskId === task.id ? "" : task.description === "" ? "hidden" : ""}`} key={index}>
                     <input
-                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-500/75" : ""}`}
+                      className={`w-full p-0.5 px-2 outline-none rounded-2xl ${editingTaskId === task.id ? "bg-zinc-300/75 dark:bg-zinc-700/75" : ""}`}
                       title="description"
                       placeholder="توضیحات"
                       value={editingTaskId === task.id ? editingTaskDescription : task.description}
