@@ -1,20 +1,20 @@
 import Select, { MultiValue, StylesConfig } from "react-select";
 import { useEffect, useState } from "react";
-import { ISelectCategorie } from "./ISelectCategories";
+import { categories, ISelectCategorie } from "./Categories";
 
 interface SelectCategoriesProps {
-  setNewTaskInputCategories: (categories: string[]) => void;
+  val: string[];
+  setTaskInputCategories: (categories: string[]) => void;
 }
 
-export const SelectCategories = ({ setNewTaskInputCategories }: SelectCategoriesProps) => {
-  const categories: ISelectCategorie[] = [
-    { value: "Favorite", label: "مورد علاقه", color: "gold" },
-    { value: "Work", label: "کاری", color: "blue" },
-    { value: "Personal", label: "شخصی", color: "green" },
-  ];
-
+export const SelectCategories = ({ val, setTaskInputCategories }: SelectCategoriesProps) => {
+  const values = categories.filter((category) => val.includes(category.value));
   function handleCategries(selectedOption: MultiValue<ISelectCategorie> | null) {
-    setNewTaskInputCategories(selectedOption?.map((option) => option.value) || []);
+    if (selectedOption) {
+      setTaskInputCategories(selectedOption.map((option) => option.value) || []);
+    } else {
+      setTaskInputCategories([]);
+    }
   }
 
   // Detect if dark mode is enabled and update when class changes
@@ -82,7 +82,7 @@ export const SelectCategories = ({ setNewTaskInputCategories }: SelectCategories
 
   return (
     <div>
-      <Select isSearchable options={categories} onChange={handleCategries} isMulti placeholder="انتخاب دسته بندی" styles={customStyles} className="w-full" />
+      <Select isSearchable value={values} options={categories} onChange={handleCategries} isMulti placeholder="انتخاب دسته بندی" styles={customStyles} className="w-full" />
     </div>
   );
 };
