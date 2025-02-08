@@ -3,20 +3,27 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import {convertPersianToEnglishNumbers} from "../utils/persianNumberToEnglish";
-const PersianDatePicker = () => {
+import { convertPersianToEnglishNumbers } from "../utils/persianNumberToEnglish";
+interface PersianDatePickerProps {
+  setNewTaskDate: (date: string | null) => void;
+  setNewTaskTime: (time: string | null) => void;
+}
+const PersianDatePicker = ({ setNewTaskDate, setNewTaskTime }: PersianDatePickerProps) => {
   const [dateTime, setDateTime] = useState<string[] | null>(null);
-  
+
   // Function to handle date selection
   const handleChange = (date: DateObject | null) => {
     if (date) {
       console.log(convertPersianToEnglishNumbers(date.format("YYYY/MM/DD HH:mm")).split(" "));
       setDateTime(convertPersianToEnglishNumbers(date.format("YYYY/MM/DD HH:mm")).split(" ")); // Convert DateObject to string
+      if (dateTime) {
+        setNewTaskDate(dateTime[0]);
+        setNewTaskTime(dateTime[1]);
+      }
     } else {
       setDateTime(null);
     }
   };
-
   return (
     <div className="flex flex-col items-center space-y-4 p-4 border rounded-xl shadow-lg bg-white">
       <label className="text-lg font-semibold text-gray-700">تاریخ و ساعت را انتخاب کنید:</label>

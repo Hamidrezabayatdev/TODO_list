@@ -8,6 +8,8 @@ export const NewTask = (props: NewTaskProps) => {
   const [NewTaskInputTitle, setNewTaskInputTitle] = useState("");
   const [NewTaskInputDescription, setNewTaskInputDescription] = useState("");
   const [NewTaskInputCategories, setNewTaskInputCategories] = useState<string[]>([]);
+  const [NewTaskDate, setNewTaskDate] = useState<string | null>("");
+  const [NewTaskTime, setNewTaskTime] = useState<string | null>("");
   function handleSubmit(e? : React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
     props.addTask(NewTaskInputTitle, NewTaskInputDescription, NewTaskInputCategories);
@@ -61,7 +63,7 @@ export const NewTask = (props: NewTaskProps) => {
       <div>
         <SelectCategories setTaskInputCategories={setNewTaskInputCategories} val={NewTaskInputCategories} />
       </div>
-      <PersianDatePicker />
+      <PersianDatePicker setNewTaskDate={setNewTaskDate} setNewTaskTime={setNewTaskTime}/>
     </div>
   );
 };
