@@ -61,7 +61,7 @@ export const NewTask = (props: NewTaskProps) => {
       <div>
         <SelectCategories setTaskInputCategories={setNewTaskInputCategories} val={NewTaskInputCategories} />
       </div>
-      {/* <PersianDatePicker /> */}
+      <PersianDatePicker />
     </div>
   );
 };
