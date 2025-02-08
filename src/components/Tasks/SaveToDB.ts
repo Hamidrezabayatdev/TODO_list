@@ -1,6 +1,6 @@
-import { ITask } from "./ITask";
+import { ITask } from "../../types/ITask";
 
-export function saveToDB (tasks: ITask[], doneTasks: ITask[]) {
+export function saveToDB(tasks: ITask[], doneTasks: ITask[]) {
   fetch("https://todo-list-dce98-default-rtdb.firebaseio.com/tasks.json", {
     method: "PUT",
     headers: {

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { NewTask } from "./NewTask";
-import { ITask } from "./ITask";
+import { ITask } from "../../types/ITask";
 import { ShowTasks } from "./ShowTasks";
 import { ShowDoneTasks } from "./ShowDoneTasks";
 import { saveToDB } from "./SaveToDB";
 import { loadFromDB } from "./LoadFromDB";
+import { sortTasks } from "../../utils/sortTasks";
 export const Tasks = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
@@ -31,8 +32,8 @@ export const Tasks = () => {
     };
     saveTasks();
   }, [tasks, doneTasks]);
-  function addTask(taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[]) {
-    setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription, categories: taskInputCategories }]);
+  function addTask(taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[], taskDate: string | null, taskTime: string | null) {
+    setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription, categories: taskInputCategories, date: taskDate, time: taskTime }]);
   }
   function editTask(taskId: number, taskTitle: string, taskDescription: string, taskInputCategories: string[]) {
     setTasks(tasks.map((task) => (task.id === taskId ? { ...task, title: taskTitle, description: taskDescription, categories: taskInputCategories } : task)));

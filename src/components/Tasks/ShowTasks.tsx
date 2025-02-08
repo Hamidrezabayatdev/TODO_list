@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ITask } from "./ITask";
+import { ITask } from "../../types/ITask";
 import { SelectCategories } from "./SelectCategories";
-import { categories } from "./Categories";
+import { categories } from "../../types/Categories";
 interface ShowTasksProps {
   tasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;

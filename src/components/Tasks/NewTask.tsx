@@ -1,21 +1,23 @@
 import { useState, useRef } from "react";
-import PersianDatePicker from "../DatePickerComponent";
+import PersianDatePicker from "../PersianDatePicker";
 import { SelectCategories } from "./SelectCategories";
 interface NewTaskProps {
-  addTask: (taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[]) => void;
+  addTask: (taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[], taskDate: string | null, taskTime: string | null) => void;
 }
 export const NewTask = (props: NewTaskProps) => {
   const [NewTaskInputTitle, setNewTaskInputTitle] = useState("");
   const [NewTaskInputDescription, setNewTaskInputDescription] = useState("");
   const [NewTaskInputCategories, setNewTaskInputCategories] = useState<string[]>([]);
-  const [NewTaskDate, setNewTaskDate] = useState<string | null>("");
-  const [NewTaskTime, setNewTaskTime] = useState<string | null>("");
+  const [NewTaskDate, setNewTaskDate] = useState<string | null>(null);
+  const [NewTaskTime, setNewTaskTime] = useState<string | null>(null);
   function handleSubmit(e? : React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
-    props.addTask(NewTaskInputTitle, NewTaskInputDescription, NewTaskInputCategories);
+    props.addTask(NewTaskInputTitle, NewTaskInputDescription, NewTaskInputCategories, NewTaskDate, NewTaskTime);
     setNewTaskInputTitle("");
     setNewTaskInputDescription("");
     setNewTaskInputCategories([]);
+    setNewTaskDate(null);
+    setNewTaskTime(null);
   }
   const NewTaskInputTitleRef = useRef<HTMLInputElement>(null);
   const NewTaskInputDescriptionRef = useRef<HTMLInputElement>(null);
@@ -63,7 +65,7 @@ export const NewTask = (props: NewTaskProps) => {
       <div>
         <SelectCategories setTaskInputCategories={setNewTaskInputCategories} val={NewTaskInputCategories} />
       </div>
-      <PersianDatePicker setNewTaskDate={setNewTaskDate} setNewTaskTime={setNewTaskTime}/>
+      {/* <PersianDatePicker setNewTaskDate={setNewTaskDate} setNewTaskTime={setNewTaskTime}/> */}
     </div>
   );
 };

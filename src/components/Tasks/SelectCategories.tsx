@@ -1,6 +1,6 @@
 import Select, { MultiValue, StylesConfig } from "react-select";
 import { useEffect, useState } from "react";
-import { categories, ISelectCategorie } from "./Categories";
+import { categories, ISelectCategorie } from "../../types/Categories";
 
 interface SelectCategoriesProps {
   val: string[];

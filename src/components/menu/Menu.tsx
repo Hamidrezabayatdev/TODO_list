@@ -1,5 +1,5 @@
 import { MenuItem } from "./MenuItem";
-import { MenuItemsType } from "./MenuItemsType";
+import { MenuItemsType } from "../../types/MenuItemsType";
 import { Profile } from "./Profile";
 import { ThemeChange } from "./Theme/ThemeChange";
 export const Menu = () => {

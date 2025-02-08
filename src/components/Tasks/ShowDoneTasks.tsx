@@ -1,5 +1,5 @@
-import { categories } from "./Categories";
-import { ITask } from "./ITask";
+import { categories } from "../../types/Categories";
+import { ITask } from "../../types/ITask";
 interface ShowDoneTasksProps {
   doneTasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;

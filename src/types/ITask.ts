@@ -3,6 +3,6 @@ export interface ITask {
     title: string;
     description: string;
     categories: string[];
-    date?: string;
-    time?: string;
+    date: string | null;
+    time: string | null;
 }

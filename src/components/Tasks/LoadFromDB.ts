@@ -1,4 +1,4 @@
-import { ITask } from "./ITask";
+import { ITask } from "../../types/ITask";
 interface loadFromDBProps {
   setTasks: (tasks: ITask[]) => void;
   setDoneTasks: (tasks: ITask[]) => void;
