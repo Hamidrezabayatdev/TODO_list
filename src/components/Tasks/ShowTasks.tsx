@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ITask } from "./ITask";
 import { SelectCategories } from "./SelectCategories";
 import { categories } from "./Categories";
-import { useScreenWidth } from "../../Contexts/ScreenWitdhContext";
 interface ShowTasksProps {
   tasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;
@@ -20,7 +19,6 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
     setEditingTaskDescription(task.description);
     setEditingTaskCategories(task.categories);
   };
-  const screenWidth = useScreenWidth();
   function saveTaskEdit(taskId: number) {
     editTask(taskId, editingTaskTitle, editingTaskDescription, editingTaskCategories);
     setEditingTaskId(null);
@@ -74,7 +72,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                 </div>
                 <div className="flex items-center justify-center gap-0.5 sm:gap-4">
                   {/* categories big */}
-                  <div className={`${editingTaskId !== task.id && screenWidth > 640 ? "" : "hidden"} flex items-center gap-1`}>
+                  <div className={`${editingTaskId === task.id ? "hidden" : "hidden sm:flex"} items-center gap-1`}>
                     {task.categories?.map((category, index) => (
                       <div className="text-sm text-nowrap bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-0.5 px-1 opacity-75 mt-0.5" key={index}>
                         {categories.find((cat) => cat.value === category)?.label}
@@ -82,7 +80,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                     ))}
                   </div>
                   {/* categories edit big */}
-                  <div className={`${editingTaskId === task.id && screenWidth > 1024 ? "" : "hidden"} w-full lg:w-60 xl:w-80`}>
+                  <div className={`${editingTaskId !== task.id ? "hidden" : "hidden lg:block"} w-full lg:w-60 xl:w-80`}>
                     <SelectCategories setTaskInputCategories={setEditingTaskCategories} val={editingTaskId === task.id ? editingTaskCategories : task.categories ? task.categories : []} />
                   </div>
                   {/* edit and delete icons */}
@@ -106,7 +104,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                 </div>
               </div>
               {/* categories small */}
-              <div className={`${editingTaskId !== task.id && screenWidth < 640 ? "" : "hidden"} flex justify-center items-center gap-1 mx-auto`}>
+              <div className={`${editingTaskId === task.id ? "hidden" : "sm:hidden flex"} justify-center items-center gap-1 mx-auto`}>
                 {task.categories?.map((category, index) => (
                   <div className="text-sm text-nowrap bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-0.5 px-1 opacity-75 mt-0.5" key={index}>
                     {categories.find((cat) => cat.value === category)?.label}
@@ -114,7 +112,7 @@ export const ShowTasks = ({ tasks, taskDelete, editTask, doTask }: ShowTasksProp
                 ))}
               </div>
               {/* categories edit small */}
-              <div className={`${editingTaskId === task.id && screenWidth < 1024 ? "" : "hidden"} mr-10 `}>
+              <div className={`${editingTaskId !== task.id ? "hidden" : "block lg:hidden"} mt-1 mr-10 `}>
                 <SelectCategories setTaskInputCategories={setEditingTaskCategories} val={editingTaskId === task.id ? editingTaskCategories : task.categories ? task.categories : []} />
               </div>
             </div>

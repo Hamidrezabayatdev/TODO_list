@@ -1,13 +1,11 @@
 import { categories } from "./Categories";
 import { ITask } from "./ITask";
-import { useScreenWidth } from "../../Contexts/ScreenWitdhContext";
 interface ShowDoneTasksProps {
   doneTasks: ITask[];
   taskDelete: (taskId: number, doneOrTasks: string) => void;
   doTask: (task: ITask, isDone: boolean) => void;
 }
 export const ShowDoneTasks = ({ doneTasks, taskDelete, doTask }: ShowDoneTasksProps) => {
-  const screenWidth = useScreenWidth();
   return (
     <div>
       {doneTasks.map((task, index) => (
@@ -22,7 +20,7 @@ export const ShowDoneTasks = ({ doneTasks, taskDelete, doTask }: ShowDoneTasksPr
               </div>
             </div>
             {/* categories big */}
-            <div className={`${screenWidth > 640 ? "" : "hidden"} flex items-center gap-1`}>
+            <div className="hidden sm:flex items-center gap-1">
               {task.categories?.map((category, index) => (
                 <div className="text-sm text-nowrap bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-0.5 px-1 opacity-75 mt-0.5" key={index}>
                   {categories.find((cat) => cat.value === category)?.label}
@@ -37,7 +35,7 @@ export const ShowDoneTasks = ({ doneTasks, taskDelete, doTask }: ShowDoneTasksPr
             </div>
           </div>
           {/* categories small */}
-          <div className={`${screenWidth < 640 ? "" : "hidden"} flex justify-center items-center gap-1 mx-auto`}>
+          <div className="sm:hidden flex justify-center items-center gap-1 mx-auto mt-1">
             {task.categories?.map((category, index) => (
               <div className="text-sm text-nowrap bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-0.5 px-1 opacity-75 mt-0.5" key={index}>
                 {categories.find((cat) => cat.value === category)?.label}

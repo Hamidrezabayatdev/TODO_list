@@ -8,7 +8,7 @@ interface SelectCategoriesProps {
 }
 
 export const SelectCategories = ({ val, setTaskInputCategories }: SelectCategoriesProps) => {
-  const values = categories.filter((category) => val.includes(category.value));
+  const values = categories.filter((category) => val?.includes(category.value));
   function handleCategries(selectedOption: MultiValue<ISelectCategorie> | null) {
     if (selectedOption) {
       setTaskInputCategories(selectedOption.map((option) => option.value) || []);
