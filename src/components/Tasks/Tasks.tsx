@@ -6,10 +6,19 @@ import { ShowDoneTasks } from "./ShowDoneTasks";
 import { saveToDB } from "./SaveToDB";
 import { loadFromDB } from "./LoadFromDB";
 import { sortTasks } from "../../utils/sortTasks";
-export const Tasks = () => {
+interface TasksProps {
+  selectedCategory : string;
+}
+export const Tasks = ({ selectedCategory }: TasksProps) => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
-
+  let categoryTasks = tasks;
+  let categoryDoneTasks = doneTasks;
+  if (selectedCategory !== "tasks") {
+    categoryTasks = tasks.filter((task) => task.categories?.includes(selectedCategory));
+    categoryDoneTasks = doneTasks.filter((task) => task.categories?.includes(selectedCategory));
+  }
+  // load tasks
   useEffect(() => {
     const loadTasks = async () => {
       try {
@@ -20,6 +29,7 @@ export const Tasks = () => {
     };
     loadTasks();
   }, []);
+  // save tasks
   useEffect(() => {
     const saveTasks = async () => {
       if (tasks.length > 0) {
@@ -32,6 +42,7 @@ export const Tasks = () => {
     };
     saveTasks();
   }, [tasks, doneTasks]);
+
   function addTask(taskInputTitle: string, taskInputDescription: string, taskInputCategories: string[], taskDate: string | null, taskTime: string | null) {
     setTasks([...tasks, { id: Date.now(), title: taskInputTitle, description: taskInputDescription, categories: taskInputCategories, date: taskDate, time: taskTime }]);
   }
@@ -60,12 +71,12 @@ export const Tasks = () => {
       <div className={`opacity-50 ${tasks.length > 0 ? "" : "invisible"}`}>{tasks.length} تسک رو باید انجام بدی</div>
       <NewTask addTask={addTask} />
       <div className={`${tasks.length > 0 ? "bg-zinc-200/25 dark:bg-zinc-700/25" : ""} rounded-2xl`}>
-        <ShowTasks tasks={tasks} taskDelete={taskDelete} editTask={editTask} doTask={doTask} />
+        <ShowTasks tasks={categoryTasks} taskDelete={taskDelete} editTask={editTask} doTask={doTask} />
       </div>
       <div className="mt-5 text-2xl font-bold">تسک های انجام شده</div>
       <div className="opacity-50">{doneTasks.length > 0 ? `${doneTasks.length} تسک رو باید انجام بدی` : "هیچ تسکی انجام نشده"}</div>
       <div className="bg-zinc-200/25 dark:bg-zinc-700/25 rounded-2xl">
-        <ShowDoneTasks doneTasks={doneTasks} taskDelete={taskDelete} doTask={doTask} />
+        <ShowDoneTasks doneTasks={categoryDoneTasks} taskDelete={taskDelete} doTask={doTask} />
       </div>
     </div>
   );

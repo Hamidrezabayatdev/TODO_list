@@ -4,7 +4,7 @@ export interface ISelectCategorie {
     color?: string;
 }
 export const categories: ISelectCategorie[] = [
-  { value: "Favorite", label: "مورد علاقه" },
-  { value: "Work", label: "کاری" },
-  { value: "Personal", label: "شخصی" },
+  { value: "favorite", label: "مورد علاقه" },
+  { value: "work", label: "کاری" },
+  { value: "personal", label: "شخصی" },
 ];

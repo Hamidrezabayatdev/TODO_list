@@ -25,7 +25,7 @@ export const NewTask = (props: NewTaskProps) => {
     <div className="p-3 mt-5 w-full flex flex-col gap-2 sm:flex-row sm:items-center justify-between rounded-2xl border-2 border-zinc-400 dark:border-zinc-600 border-dashed">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="flex items-center gap-2">
-          <button type="submit">
+          <button className="cursor-pointer" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 border-2 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-100 hover:border-zinc-700 dark:hover:border-zinc-100 hover:stroke-zinc-50 dark:hover:stroke-zinc-700 transition-all">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>

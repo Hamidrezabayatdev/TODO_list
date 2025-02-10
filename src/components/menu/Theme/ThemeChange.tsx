@@ -23,11 +23,11 @@ export const ThemeChange = () => {
     ),
   };
   return (
-    <div className="bg-zinc-200 dark:bg-zinc-700 mt-auto mx-4 mb-4 py-1 px-2 rounded-lg flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2 bg-zinc-200 dark:bg-zinc-700 mt-auto mx-4 mb-4 py-1 px-2 rounded-lg">
       <div onClick={handleLightTheme}>
         <ThemeChangeBtn isDark={isDark} mode="light" icon={ThemeIcons.light} />
       </div>
-      <div className="w-[1px] h-[60%] bg-zinc-500/30"></div>
+      <div className="w-[1px] h-6 bg-zinc-500/30"></div>
       <div onClick={handleDarkTheme}>
         <ThemeChangeBtn isDark={isDark} mode="dark" icon={ThemeIcons.dark} />
       </div>
