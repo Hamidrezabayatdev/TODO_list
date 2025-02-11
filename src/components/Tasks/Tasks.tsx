@@ -8,9 +8,10 @@ import { loadFromDB } from "./LoadFromDB";
 import { categories } from "../../types/Categories";
 import { sortTasks } from "../../utils/sortTasks";
 interface TasksProps {
-  selectedCategory : string;
+  selectedCategory: string;
+  setIsMenuOpen: (isOpen: boolean) => void
 }
-export const Tasks = ({ selectedCategory }: TasksProps) => {
+export const Tasks = ({ selectedCategory, setIsMenuOpen }: TasksProps) => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
   let categoryTasks = tasks;
@@ -67,9 +68,16 @@ export const Tasks = ({ selectedCategory }: TasksProps) => {
     }
   }
   return (
-    <div className="w-full mt-20">
-      <div className="text-2xl font-bold">تسک های امروز</div>
-      <div className={`opacity-50 ${tasks.length > 0 ? "" : "invisible"}`}>{tasks.length} تسک رو باید انجام بدی</div>
+    <div className="w-full mt-5 md:mt-20">
+      <div className="flex items-center gap-5">
+        <svg className="cursor-pointer md:hidden size-8" onClick={() => setIsMenuOpen(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <div>
+          <div className="text-2xl font-bold">تسک های امروز</div>
+          <div className={`opacity-50 ${tasks.length > 0 ? "" : "hidden"}`}>{tasks.length} تسک رو باید انجام بدی</div>
+        </div>
+      </div>
       <NewTask addTask={addTask} />
       <div className={`${tasks.length > 0 ? "bg-zinc-200/25 dark:bg-zinc-700/25" : ""} rounded-2xl`}>
         <ShowTasks tasks={categoryTasks} taskDelete={taskDelete} editTask={editTask} doTask={doTask} />

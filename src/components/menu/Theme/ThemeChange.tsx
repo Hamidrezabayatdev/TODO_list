@@ -23,7 +23,7 @@ export const ThemeChange = () => {
     ),
   };
   return (
-    <div className="flex items-center justify-center gap-2 bg-zinc-200 dark:bg-zinc-700 mt-auto mx-4 mb-4 py-1 px-2 rounded-lg">
+    <div className="flex items-center justify-around gap-2 bg-zinc-200 dark:bg-zinc-700 mt-auto mx-4 mb-4 py-1 px-2 rounded-lg">
       <div onClick={handleLightTheme}>
         <ThemeChangeBtn isDark={isDark} mode="light" icon={ThemeIcons.light} />
       </div>

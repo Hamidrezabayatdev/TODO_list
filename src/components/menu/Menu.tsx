@@ -7,8 +7,9 @@ import { ThemeChange } from "./Theme/ThemeChange";
 interface MenuProps {
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
+  setIsMenuOpen: (isOpen: boolean) => void;
 }
-export const Menu = ({ selectedCategory, setSelectedCategory }: MenuProps) => {
+export const Menu = ({ selectedCategory, setSelectedCategory, setIsMenuOpen }: MenuProps) => {
   const MenuItemsData: MenuItemsType = {
     tasks: {
       title: "تسک‌ها",
@@ -74,12 +75,22 @@ export const Menu = ({ selectedCategory, setSelectedCategory }: MenuProps) => {
   };
   const todayDate = jalali().locale("fa").format("YYYY/MM/DD"); // Get today's Jalali date
   return (
-    <div className="h-full w-full flex flex-col bg-white dark:bg-zinc-800 px-2 pt-4 rounded-2xl shadow">
+    <div className="relative h-full w-full flex flex-col bg-white dark:bg-zinc-800 px-2 pt-4 rounded-2xl shadow">
+      <div className=" absolute left-2 top-4 flex justify-end md:hidden" onClick={() => setIsMenuOpen(false)}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
       <Profile name="حمیدرضا بیات" date={todayDate} />
       <div className="flex flex-col gap-6 overflow-y-auto">
         {Object.entries(MenuItemsData).map(([key, value]) => (
-          <div onClick={() => setSelectedCategory(key)}>
-            <MenuItem key={key} text={value.title} icon={value.icon} selected={selectedCategory === key} />
+          <div
+            onClick={() => {
+              setSelectedCategory(key);
+              setIsMenuOpen(false);
+            }}
+          >
+            <MenuItem key={key} text={value.title} icon={value.icon} selected={key === "tasks" && selectedCategory === "" ? true : selectedCategory === key} />
           </div>
         ))}
       </div>

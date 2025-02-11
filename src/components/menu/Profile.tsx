@@ -65,7 +65,7 @@ export const Profile: React.FC<ProfileProps> = ({ name, date }) => {
 
   return (
     <div>
-      <div className="flex items-center gap-4 mt-12 mb-14 pr-2 mx-3">
+      <div className="flex items-center gap-4 md:mt-12 mb-4 md:mb-14 pr-2 mx-3">
         <div className="relative flex items-center justify-center w-24 h-24 rounded-full overflow-hidden border border-gray-300">
           {/* Profile Image Preview */}
           <div className="w-full h-full">{image ? <img src={image} alt="Profile" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-400">No Image</div>}</div>
