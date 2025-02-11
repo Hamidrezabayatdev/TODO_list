@@ -3,6 +3,7 @@ import { MenuItemsType } from "../../types/MenuItemsType";
 import { Profile } from "./Profile";
 import jalali from "jalali-moment"; // Persian calendar support
 import { ThemeChange } from "./Theme/ThemeChange";
+
 interface MenuProps {
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
@@ -41,14 +42,14 @@ export const Menu = ({ selectedCategory, setSelectedCategory }: MenuProps) => {
         </svg>
       ),
     },
-    // home: {
-    //   title: "خانه",
-    //   icon: (
-    //     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="">
-    //       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-    //     </svg>
-    //   ),
-    // },
+    money: {
+      title: "مالی",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+        </svg>
+      ),
+    },
     settings: {
       title: "تنظیمات",
       icon: (
@@ -75,7 +76,7 @@ export const Menu = ({ selectedCategory, setSelectedCategory }: MenuProps) => {
   return (
     <div className="h-full w-full flex flex-col bg-white dark:bg-zinc-800 px-2 pt-4 rounded-2xl shadow">
       <Profile name="حمیدرضا بیات" date={todayDate} />
-      <div className="flex flex-col gap-6 overflow-y-scroll">
+      <div className="flex flex-col gap-6 overflow-y-auto">
         {Object.entries(MenuItemsData).map(([key, value]) => (
           <div onClick={() => setSelectedCategory(key)}>
             <MenuItem key={key} text={value.title} icon={value.icon} selected={selectedCategory === key} />
@@ -83,7 +84,7 @@ export const Menu = ({ selectedCategory, setSelectedCategory }: MenuProps) => {
         ))}
       </div>
       <div className="mt-auto">
-      <ThemeChange></ThemeChange>
+        <ThemeChange />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { ShowTasks } from "./ShowTasks";
 import { ShowDoneTasks } from "./ShowDoneTasks";
 import { saveToDB } from "./SaveToDB";
 import { loadFromDB } from "./LoadFromDB";
+import { categories } from "../../types/Categories";
 import { sortTasks } from "../../utils/sortTasks";
 interface TasksProps {
   selectedCategory : string;
@@ -14,7 +15,7 @@ export const Tasks = ({ selectedCategory }: TasksProps) => {
   const [doneTasks, setDoneTasks] = useState<ITask[]>([]);
   let categoryTasks = tasks;
   let categoryDoneTasks = doneTasks;
-  if (selectedCategory !== "tasks") {
+  if (categories.some((category) => category.value === selectedCategory)) {
     categoryTasks = tasks.filter((task) => task.categories?.includes(selectedCategory));
     categoryDoneTasks = doneTasks.filter((task) => task.categories?.includes(selectedCategory));
   }
