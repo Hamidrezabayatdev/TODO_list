@@ -6,7 +6,7 @@ import { ShowDoneTasks } from "./ShowDoneTasks";
 import { saveToDB } from "./SaveToDB";
 import { loadFromDB } from "./LoadFromDB";
 import { categories } from "../../types/Categories";
-import { sortTasks } from "../../utils/sortTasks";
+
 interface TasksProps {
   selectedCategory: string;
   setIsMenuOpen: (isOpen: boolean) => void
